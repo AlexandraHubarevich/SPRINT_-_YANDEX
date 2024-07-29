@@ -1,4 +1,4 @@
-package LocatorsALL;
+package locatorsall;
 
 import org.openqa.selenium.By;
 

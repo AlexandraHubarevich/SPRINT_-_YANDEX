@@ -1,6 +1,7 @@
-import PageObject.mainPage;
-import PageObject.orderPage1;
-import PageObject.orderPage2;
+import org.junit.Before;
+import pageobject.MainPage;
+import pageobject.OrderPageFirst;
+import pageobject.OrderPageSecond;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +39,11 @@ public class DatePickerTest {
         };
     }
 
+    @Before
+    public void start() {
+        driver = new ChromeDriver();
+    }
+
     @After
     public void after() {
         driver.quit();
@@ -46,12 +52,11 @@ public class DatePickerTest {
     //Метод проверяет, что выбранная в календаре дата сохраняется в правильном формате
     @Test
     public void datePickerTest() {
-        driver = new ChromeDriver();
-        mainPage DatePick = new mainPage(driver);
+        MainPage DatePick = new MainPage(driver);
         DatePick.openPageToOrderUseUpperButton();
-        orderPage1 DatePick1 = new orderPage1(driver);
+        OrderPageFirst DatePick1 = new OrderPageFirst(driver);
         DatePick1.loginFirstPage(name, surName, address, subway, phone);
-        orderPage2 DatePick2 = new orderPage2(driver);
+        OrderPageSecond DatePick2 = new OrderPageSecond(driver);
         DatePick2.checkDatepicker();
         assertEquals("DatesAreEqual", dateExpected, DatePick2.checkDatepicker());
     }

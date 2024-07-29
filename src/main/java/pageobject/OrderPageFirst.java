@@ -1,4 +1,4 @@
-package PageObject;
+package pageobject;
 
 import org.openqa.selenium.*;
 
@@ -6,12 +6,12 @@ import java.util.List;
 
 
 //Класс для странцы которая открывается после нажатия кнопки Заказать
-public class orderPage1 {
+public class OrderPageFirst {
 
 
     private WebDriver driver;
 
-    public orderPage1(WebDriver driver) {
+    public OrderPageFirst(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -36,19 +36,19 @@ public class orderPage1 {
 
 
     //Метод для заполнения поля Имя
-    public orderPage1 setUsername(String name) {
+    public OrderPageFirst setUsername(String name) {
         driver.findElement(nameloc).sendKeys(name);
         return this;
     }
 
     //Метод для заполнения поля Фамилия
-    public orderPage1 setSurName(String surName) {
+    public OrderPageFirst setSurName(String surName) {
         driver.findElement(surNameloc).sendKeys(surName);
         return this;
     }
 
     //Метод для заполнения поля адрес
-    public orderPage1 setAddressDown(String address) {
+    public OrderPageFirst setAddressDown(String address) {
         driver.findElement(addressloc).sendKeys(address);
         return this;
     }
@@ -69,13 +69,13 @@ public class orderPage1 {
     }
 
     //Метод для заполнения поля Телефон
-    public orderPage1 setPhone(String phone) {
+    public OrderPageFirst setPhone(String phone) {
         driver.findElement(phoneloc).sendKeys(phone);
         return this;
     }
 
     // Метод для нажатия кнопки Далее
-    public orderPage1 clickFButtonDown() {
+    public OrderPageFirst clickFButtonDown() {
         driver.findElement(fButton).click();
         return this;
     }
@@ -96,7 +96,7 @@ public class orderPage1 {
     }
 
     //Конструктор для использования параметризации
-    public orderPage1 loginFirstPage(String name, String surName, String address, String subway, String phone) {
+    public OrderPageFirst loginFirstPage(String name, String surName, String address, String subway, String phone) {
         setUsername(name);
         setSurName(surName);
         setAddressDown(address);

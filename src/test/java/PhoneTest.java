@@ -1,5 +1,6 @@
-import PageObject.mainPage;
-import PageObject.orderPage1;
+import org.junit.Before;
+import pageobject.MainPage;
+import pageobject.OrderPageFirst;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +41,12 @@ public class PhoneTest {
         };
     }
 
+    @Before
+    public void start() {
+        driver = new ChromeDriver();
+
+    }
+
     @After
     public void after() {
         driver.quit();
@@ -47,10 +54,9 @@ public class PhoneTest {
 
     @Test
     public void pageFirstTestUseUpperButton() {
-        driver = new ChromeDriver();
-        mainPage phoneTestOpenPage = new mainPage(driver);
+        MainPage phoneTestOpenPage = new MainPage(driver);
         phoneTestOpenPage.openPageToOrderUseUpperButton();
-        orderPage1 phoneTestOpenPage2 = new orderPage1(driver);
+        OrderPageFirst phoneTestOpenPage2 = new OrderPageFirst(driver);
         phoneTestOpenPage2.setPhone(phone);
         phoneTestOpenPage2.clickFButtonDown();
         assertEquals("Error in " + number, isCorrect, driver.findElement(incorrectNumberMessage).isDisplayed());

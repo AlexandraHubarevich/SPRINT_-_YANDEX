@@ -1,4 +1,4 @@
-package PageObject;
+package pageobject;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,10 +8,10 @@ import java.time.Duration;
 
 
 //Класс для второй страницы пр кейсе заказ с кнопки Вверх
-public class orderPage2 {
+public class OrderPageSecond {
     private WebDriver driver;
 
-    public orderPage2(WebDriver driver) {
+    public OrderPageSecond(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -86,19 +86,19 @@ public class orderPage2 {
     }
 
     //Метод который пишет комментарий
-    public orderPage2 CommentSecond(String comment) {
+    public OrderPageSecond  commentSecond(String comment) {
         driver.findElement(Comment).sendKeys(comment);
         return this;
     }
 
     //Метод для нажатия кнопки Заказать
-    public orderPage2 clickButtonOrderDown() {
+    public OrderPageSecond clickButtonOrderDown() {
         driver.findElement(ButtonOrder).click();
         return this;
     }
 
     //В окне хотите оформить заказ нажимаем Да
-    public orderPage2 ClickYes() {
+    public OrderPageSecond clickYes() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.findElement(YesButton).click();
         return this;
@@ -113,13 +113,13 @@ public class orderPage2 {
         return OrderExistWindow.isDisplayed();
     }
 
-    public orderPage2 loginSecondPage(String date, String color, String rent, String comment) {
+    public OrderPageSecond loginSecondPage(String date, String color, String rent, String comment) {
         chooseDate(date);
         chooseRent(rent);
         chooseColorSecond(color);
-        CommentSecond(comment);
+        commentSecond(comment);
         clickButtonOrderDown();
-        ClickYes();
+        clickYes();
         return this;
     }
 }

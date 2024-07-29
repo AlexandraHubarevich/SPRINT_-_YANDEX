@@ -1,4 +1,4 @@
-package PageObject;
+package pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,13 +8,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
 import java.util.List;
 
 
-public class mainPage {
+public class MainPage {
     private WebDriver driver;
 
-    public mainPage(WebDriver driver) {
+    public MainPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -39,27 +40,6 @@ public class mainPage {
     //Локатор, по которому ищем все ответы
     private static final By Reply = By.xpath(".//*[@class='accordion__panel']/p");
 
-    //Это массив строк-вопросов, которые должны быть на сайте
-    public String[] ExpectedQuestions = {"Сколько это стоит? И как оплатить?",
-            "Хочу сразу несколько самокатов! Так можно?",
-            "Как рассчитывается время аренды?",
-            "Можно ли заказать самокат прямо на сегодня?",
-            "Можно ли продлить заказ или вернуть самокат раньше?",
-            "Вы привозите зарядку вместе с самокатом?",
-            "Можно ли отменить заказ?",
-            "Я жизу за МКАДом, привезёте?"
-    };
-    //Это массив строк-ответов, которые должны быть на сайте
-    public String[] ExpectedReplies = {
-            "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
-            "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.",
-            "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.",
-            "Только начиная с завтрашнего дня. Но скоро станем расторопнее.",
-            "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.",
-            "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.",
-            "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
-            "Да, обязательно. Всем самокатов! И Москве, и Московской области."
-    };
     //Локатор для логотипа самокат
     private static final By ScooterLogo = By.xpath(".//*[@alt ='Scooter']");
     //Локатор для логотипа яндекса
@@ -79,19 +59,19 @@ public class mainPage {
 
 
     //Открытие главной странцы
-    public mainPage open() {
+    public MainPage open() {
         driver.get(FirstPageUrl);
         return this;
     }
 
     //Нажимаю кнопку куки, тк если ее не нажать, кнопка куки лезет на последний вопрос и  драйвер не находит последний вопрос по локатору
-    public mainPage clickCookie() {
+    public MainPage clickCookie() {
         driver.findElement(cookie).click();
         return this;
     }
 
     //Проматываю до блока с вопросами
-    public mainPage scrollToQuestionBlock() {
+    public MainPage scrollToQuestionBlock() {
         WebElement element = driver.findElement(QuestionBlock);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         return this;
@@ -121,9 +101,8 @@ public class mainPage {
         }
         return ActualReplies;
     }
-
     // Метод, который кликает на кнопку Заказать, расположенную внизу
-    public mainPage clickDownButton() {
+    public MainPage clickDownButton() {
         WebElement element = driver.findElement(DownButton);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         element.click();
@@ -131,14 +110,14 @@ public class mainPage {
     }
 
     // Метод, который кликает на кнопку Заказать, расположенную вверху
-    public mainPage clickUpperButton() {
+    public MainPage clickUpperButton() {
         driver.findElement(UpButton).click();
         return this;
 
     }
 
     // Метод, который находит поле для статуса заказа и кликает по нему
-    public mainPage clickOnStatusButton() {
+    public MainPage clickOnStatusButton() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.findElement(OrderStatusButton).click();
         return this;
@@ -147,14 +126,14 @@ public class mainPage {
     }
 
     // Метод, который находит поле для введения заказа и вводит несуществующий заказ
-    public mainPage enterOrderNumber() {
+    public MainPage enterOrderNumber() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(25));
         driver.findElement(incorrectVal).sendKeys("rfgtgy");
         return this;
     }
 
     // Метод, который находит и кликает кнопку Go
-    public mainPage clickGo() {
+    public MainPage clickGo() {
         driver.findElement(GoButton).click();
         return this;
     }
@@ -168,19 +147,19 @@ public class mainPage {
     }
 
     // Метод, который находит и кликает лого самоката
-    public mainPage clickScooterLogo() {
+    public MainPage clickScooterLogo() {
         driver.findElement(ScooterLogo).click();
         return this;
     }
 
     // Метод, который находит и кликает яндекс лого
-    public mainPage clickYandexLogo() {
+    public MainPage clickYandexLogo() {
         driver.findElement(YandexLogo).click();
         return this;
     }
 
     //Метод который в начале проверки открывает странцу, убирает куки и скроллит до вопросов о важном
-    public mainPage openPageScrollTillQuestion() {
+    public MainPage openPageScrollTillQuestion() {
         open();
         clickCookie();
         scrollToQuestionBlock();
@@ -188,7 +167,7 @@ public class mainPage {
     }
 
     //Метод который в начале проверки открывает странцу, убирает куки и кликает на верхнюю кнопку заказать
-    public mainPage openPageToOrderUseUpperButton() {
+    public MainPage openPageToOrderUseUpperButton() {
         open();
         clickCookie();
         clickUpperButton();
@@ -196,7 +175,7 @@ public class mainPage {
     }
 
     //Метод который в начале проверки открывает странцу, убирает куки и кликает на нижнюю кнопку заказать
-    public mainPage openPageToOrderUseDownButton() {
+    public MainPage openPageToOrderUseDownButton() {
         open();
         clickCookie();
         clickDownButton();

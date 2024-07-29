@@ -1,4 +1,5 @@
-import PageObject.mainPage;
+import org.junit.Before;
+import pageobject.MainPage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,6 +17,11 @@ import static org.junit.Assert.assertEquals;
 public class AdditionalWindowTest {
     private WebDriver driver;
 
+    @Before
+    public void start() {
+        driver = new ChromeDriver();
+    }
+
     @After
     public void after() {
         driver.quit();
@@ -25,9 +31,8 @@ public class AdditionalWindowTest {
 //Проверить: если нажать на логотип Яндекса, в новом окне откроется главная страница Яндекса.
     @Test
     public void checkClickOnYandexLogo() {
-        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        mainPage checkClickOnYandexLogo = new mainPage(driver);
+        MainPage checkClickOnYandexLogo = new MainPage(driver);
         checkClickOnYandexLogo.open();
         checkClickOnYandexLogo.clickYandexLogo();
         if (driver.getWindowHandles().size() == 2) {//Здесь я проверяю, что новое окно открылось, по количеству окон
@@ -47,8 +52,7 @@ public class AdditionalWindowTest {
     // Проверить: если нажать на логотип «Самоката», попадёшь на главную страницу «Самоката».
     @Test
     public void checkClickOnScooterLogo() {
-        driver = new ChromeDriver();
-        mainPage checkClickOnScooterLogo = new mainPage(driver);
+        MainPage checkClickOnScooterLogo = new MainPage(driver);
         checkClickOnScooterLogo.open();
         checkClickOnScooterLogo.clickScooterLogo();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -70,8 +74,7 @@ public class AdditionalWindowTest {
     //Здесь я сравнивала по атрибуту хреф, и он равен https://yandex.ru/, что ранее было главной страницей яндекса, а сейчас это дзен
     @Test
     public void checkClickOnYandexLogoSearchByAttribute() {
-        driver = new ChromeDriver();
-        mainPage checkClickOnYandexLogoSearchByAttribute = new mainPage(driver);
+        MainPage checkClickOnYandexLogoSearchByAttribute = new MainPage(driver);
         checkClickOnYandexLogoSearchByAttribute.open();
         String url = driver.findElement(By.xpath(".//*[@class='Header_LogoYandex__3TSOI']")).getAttribute("href");
         assertEquals("https://dzen.ru/?yredirect=true", url);
@@ -82,8 +85,7 @@ public class AdditionalWindowTest {
     //Здесь я сравнивала по атрибуту хреф, у лого самоката его не было
     @Test
     public void checkClickOnScooterSearchByAttribute() {
-        driver = new ChromeDriver();
-        mainPage checkOrder = new mainPage(driver);
+        MainPage checkOrder = new MainPage(driver);
         checkOrder.open();
         String url = driver.findElement(By.xpath(".//*[@alt ='Scooter']")).getAttribute("href");
         assertEquals("https://go.yandex/ru_ru/lp/rides/scooter", url);
@@ -93,8 +95,7 @@ public class AdditionalWindowTest {
 //Проверить: если ввести неправильный номер заказа, попадёшь на страницу статуса заказа. На ней должно быть написано, что такого заказа нет.
     @Test
     public void checkOrderTest() {
-        driver = new ChromeDriver();
-        mainPage checkOrder = new mainPage(driver);
+        MainPage checkOrder = new MainPage(driver);
         checkOrder.open();
         checkOrder.clickOnStatusButton();
         checkOrder.enterOrderNumber();
